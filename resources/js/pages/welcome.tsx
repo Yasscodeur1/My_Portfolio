@@ -231,7 +231,7 @@ const Welcome = () => {
                 </motion.div>
             </div>
 
-            <section className="container mx-auto mt-20 px-4" id="projets">
+            <section className="container mx-auto px-4" id="projets">
                 <div className="flex flex-col items-center">
                     <div className="-mb-14 mt-20">
                         <BadgeSecondary />
