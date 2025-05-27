@@ -3,7 +3,7 @@ import VideoFooter from "./videoFooter"
 
 export default function Footer() {
   return (
-    <footer className="dark:bg-slate-900 dark:text-slate-300 shadow-md border-t border-t-gray-200 py-5 px-6">
+    <footer className="bg-slate-50 dark:bg-slate-800 dark:text-slate-300 shadow-md border-t border-t-gray-200 py-5 px-6">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
         <div><VideoFooter /></div>
         {/* Branding */}
@@ -21,7 +21,8 @@ export default function Footer() {
           <h3 className="text-sm font-semibold dark:text-white uppercase mb-3">Navigation</h3>
           <ul className="space-y-2 text-sm">
             <li><a href="#about" className="hover:text-blue-400 transition">À propos</a></li>
-            <li><a href="#projects" className="hover:text-blue-400 transition">Projets</a></li>
+            <li><a href="#projets" className="hover:text-blue-400 transition">Projets</a></li>
+            <li><a href="#competences" className="hover:text-blue-400 transition">Compétences</a></li>
             <li><a href="#contact" className="hover:text-blue-400 transition">Contact</a></li>
           </ul>
         </div>

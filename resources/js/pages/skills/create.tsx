@@ -71,10 +71,10 @@ export default function CreateSkill({ auth }: { auth: Auth }) {
                                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                                     >
                                         <option value="">Select a category</option>
-                                        <option value="frontend">Front_end</option>
-                                        <option value="backend">Back_end</option>
-                                        <option value="fullstack">Full_stack</option>
-                                        <option value="design">Design</option>
+                                        <option value="Frontend">Front_end</option>
+                                        <option value="Backend">Back_end</option>
+                                        <option value="Fullstack">Full_stack</option>
+                                        <option value="Design">Design</option>
                                     </select>
                                     {errors.category && <p className="mt-1 text-sm text-red-600">{errors.category}</p>}
                                 </div>

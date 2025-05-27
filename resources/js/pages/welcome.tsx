@@ -1,20 +1,20 @@
+import ContactForm from '@/components/contactForm/ContactForm';
+import Footer from '@/components/footer/footer';
+import VideoHeader from '@/components/header/VideoHeader';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import type { Projet, Skills, User } from '@/types';
 import { usePage } from '@inertiajs/react';
-import { motion } from 'framer-motion';
-import { ChevronDown, Github, Linkedin, Mail } from 'lucide-react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { Github, Linkedin, Mail } from 'lucide-react';
 import { useEffect, useRef } from 'react';
 import ResponsiveAppBar from '../components/header/ResponsiveAppBar';
 import ProjetCard from '../components/projets/ProjetCard';
 import BadgeSecondary from '../components/ui/badgeSecondary';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
+import { useTheme } from '../context/ThemeContext';
 import ExperienceCard from './experiences/show';
-import ContactForm from '@/components/contactForm/ContactForm';
-import Footer from '@/components/footer/footer';
-import VideoHeader from '@/components/header/VideoHeader';
-import { useTheme } from "../context/ThemeContext"
 
 export interface PageProps {
     user: User | null; // L'utilisateur peut être null si non trouvé
@@ -75,13 +75,13 @@ const Welcome = () => {
     };
 
     // Hook pour le thème
-    const { theme } = useTheme(); // 👈 récupère le thème (dark | light)
+    const { theme } = useTheme(); // récupère le thème (dark | light)
 
     useEffect(() => {
         if (theme === 'dark') {
-        document.documentElement.classList.add('dark');
+            document.documentElement.classList.add('dark');
         } else {
-        document.documentElement.classList.remove('dark');
+            document.documentElement.classList.remove('dark');
         }
     }, [theme]);
 
@@ -102,69 +102,67 @@ const Welcome = () => {
     // Obtenir les catégories
     const categories = Object.keys(groupedSkills);
 
+    const { scrollY } = useScroll();
+    const y = useTransform(scrollY, [0, 1000], [0, -100]);
+
+    const containerRef = useRef<HTMLDivElement>(null);
+
     return (
-        <div className="mt-20 min-h-screen bg-white dark:bg-black pb-20 text-black dark:text-white" id="home">
+        <div ref={containerRef} className="min-h-screen bg-transparent text-black dark:text-white">
+            {/* Vidéo de fond */}
+            <div className="fixed inset-0 z-0">
+                <video src="/video/4954760_Coll_halloween_Dusty_6144x3456.mp4" autoPlay muted loop className="h-full w-full object-cover" />
+            </div>
 
-            {/* Wrapper principal */}
-            <div className="relative h-[32rem] bg-transparent sm:h-[36rem] md:h-[42rem] lg:h-[48rem] xl:h-[52rem] 2xl:h-screen ">
-                {/* Image de fond + navbar */}
-                {/* <div className="not-first-of-type absolute inset-x-4 top-0 z-0 h-full overflow-hidden rounded-3xl pt-5 shadow-lg shadow-amber-50 sm:inset-x-6 md:inset-x-12 lg:inset-x-20"> */}
+            {/* Contenu principal au-dessus de la vidéo */}
+            <div className="relative z-10" id="home">
                 <ResponsiveAppBar />
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-[#0F172A]/50">
-                    <VideoHeader />
-                </div>
-                {/* </div> */}
 
-                {/* Contenu utilisateur */}
-                <motion.div
-                    initial={{
-                        scale: 0.3,
-                        opacity: 0,
-                        y: 200,
-                        filter: 'blur(10px)',
-                    }}
-                    animate={{
-                        scale: 1,
-                        opacity: 1,
-                        y: 0,
-                        filter: 'blur(0px)',
-                    }}
-                    transition={{
-                        duration: 2,
-                        ease: [0.16, 1, 0.3, 1], // style "easeOutExpo"
-                    }}
-                    className="relative perspective-[2000px]"
-                >
+                {/* Bloc de présentation utilisateur */}
+                <div ref={containerRef} className="relative h-[53rem] overflow-hidden md:h-[53rem] lg:h-[48rem] xl:h-[52rem] 2xl:h-[63rem]">
+                    <motion.div className="ata-[state=active]:text-blue-500m-transparent absolute inset-0 bg-gradient-to-b to-[#0F172A]/50">
+                        <VideoHeader />
+                    </motion.div>
+
                     {user ? (
-                        <div>
-                            {/* Profil + Texte */}
+                        <motion.div
+                            initial={{ scale: 0.3, opacity: 0, y: 200, filter: 'blur(10px)' }}
+                            animate={{ scale: 1, opacity: 1, y: 0, filter: 'blur(0px)' }}
+                            transition={{ duration: 2, ease: [0.16, 1, 0.3, 1] }}
+                            className="relative perspective-[2000px]"
+                        >
                             <div className="absolute inset-x-0 top-10 z-10 flex flex-col items-center justify-center gap-20 px-4 sm:top-14 sm:px-8 md:top-28 md:px-12 lg:top-40 lg:flex-row lg:px-20 2xl:top-52 2xl:gap-40">
+                                {/* Photo de profil */}
                                 <div className="relative">
                                     <motion.div
                                         initial={{ scale: 0.9, opacity: 0 }}
                                         animate={{ scale: 1, opacity: 1 }}
                                         transition={{ duration: 0.8, ease: 'easeOut' }}
-                                        className="absolute -inset-1 rounded-full bg-gradient-to-r from-[#186970] to-[#1d2f59] opacity-25 blur"
-                                    ></motion.div>
+                                        // className="absolute -inset-1 rounded-full bg-gradient-to-r from-[#769fa3]/30 to-[#2f2f2f]/30 backdrop-blur-2xl opacity-50"
+                                        className="absolute -inset-1 rounded-full bg-gradient-to-r from-[#186970]/30 to-[#1d2f59]/30 opacity-25 blur-sm"
+                                    />
                                     <motion.img
                                         initial={{ scale: 0.6, opacity: 0, y: 100, filter: 'blur(10px)' }}
                                         animate={{ scale: 1, opacity: 1, y: 0, filter: 'blur(0px)' }}
                                         transition={{ duration: 1.2, ease: 'easeOut' }}
                                         src={user.photo}
                                         alt={`${user.name}'s photo`}
-                                        className="relative h-32 w-32 rounded-full object-cover shadow-md shadow-amber-50 sm:h-40 sm:w-40 md:h-48 md:w-48 lg:h-56 lg:w-56 xl:h-72 xl:w-72 2xl:h-96 2xl:w-96"
+                                        // className="h-32 w-32 object-cover shadow-md shadow-amber-50 sm:h-40 sm:w-40 md:h-48 md:w-48 lg:h-56 lg:w-56 xl:h-80 xl:w-80 2xl:h-2/5 2xl:w rounded-full"
+                                        className="relative h-32 w-32 rounded-full object-cover shadow-md shadow-amber-50 sm:h-40 sm:w-40 md:h-48 md:w-48 lg:h-56 lg:w-56 xl:h-80 xl:w-80 2xl:h-96 2xl:w-96"
                                     />
                                 </div>
+
+                                {/* Infos utilisateur */}
                                 <motion.div
                                     initial={{ y: 100, opacity: 0 }}
                                     animate={{ y: 0, opacity: 1 }}
                                     transition={{ duration: 1.2, delay: 0.3 }}
-                                    className="flex flex-col items-start justify-center gap-4 text-left sm:gap-6 rounded-lg bg-[#1E293B]/50 p-6 backdrop-blur-sm"
-                                    >
-                                    <Badge className="mb-2 bg-blue-500/20 px-3 py-1 text-blue-300">Développeur Full Stack</Badge>
+                                    className="flex flex-col items-start justify-center gap-4 rounded-lg bg-[#1E293B]/50 p-6 text-left backdrop-blur-sm sm:gap-6"
+                                >
+                                    <Badge className="mb-2 bg-blue-500/50 px-3 py-1 tracking-wider dark:text-blue-300">Développeur Full Stack</Badge>
 
                                     <motion.h2
-                                        style={{ fontFamily: 'var(--font-pp-editorial)' }}
+                                        style={{ fontFamily: 'PPEditorialNew' }}
                                         initial={{ y: 100, opacity: 0 }}
                                         animate={{ y: 0, opacity: 1 }}
                                         transition={{ duration: 1.2, delay: 0.3 }}
@@ -172,16 +170,28 @@ const Welcome = () => {
                                     >
                                         {user.name}
                                     </motion.h2>
-                                    
-                                    <p className="text-xl leading-[130%] font-medium tracking-tighter text-white/80 italic md:text-2xl">
+
+                                    <p
+                                        style={{ fontFamily: 'PPEditorialNew' }}
+                                        className="text-xl leading-[130%] font-medium tracking-tighter text-white/80 italic md:text-2xl"
+                                    >
                                         Du code propre pour des projets ambitieux !
                                     </p>
 
                                     <div className="mt-4 flex gap-4">
+                                        <a href="/CV_Yassin_El_Yattouti_27MAI.pdf" download>
+                                            <Button
+                                                variant="outline"
+                                                className="rounded-full border-blue-400 bg-[#102b45] text-blue-300 hover:bg-blue-400/20 hover:text-blue-200"
+                                            >
+                                                Télécharger CV
+                                            </Button>
+                                        </a>
+
                                         <a href="mailto:yasscodeur1.0@gmail.com">
                                             <Button
                                                 variant="outline"
-                                                className="rounded-full border-blue-400 text-blue-300 hover:bg-blue-400/20 hover:text-blue-200"
+                                                className="rounded-full border-blue-400 bg-[#102b45] text-blue-300 hover:bg-blue-400/20 hover:text-blue-200"
                                             >
                                                 <Mail className="mr-2 h-4 w-4" /> Contact
                                             </Button>
@@ -190,7 +200,7 @@ const Welcome = () => {
                                             <Button
                                                 variant="ghost"
                                                 size="icon"
-                                                className="rounded-full text-blue-300 hover:bg-blue-400/20 hover:text-blue-200"
+                                                className="rounded-full border border-blue-300 text-blue-300 hover:bg-blue-400/20 hover:text-blue-200"
                                             >
                                                 <Github className="h-5 w-5" />
                                             </Button>
@@ -199,7 +209,7 @@ const Welcome = () => {
                                             <Button
                                                 variant="ghost"
                                                 size="icon"
-                                                className="rounded-full text-blue-300 hover:bg-blue-400/20 hover:text-blue-200"
+                                                className="rounded-full border border-blue-300 text-blue-300 hover:bg-blue-400/20 hover:text-blue-200"
                                             >
                                                 <Linkedin className="h-5 w-5" />
                                             </Button>
@@ -208,130 +218,140 @@ const Welcome = () => {
                                 </motion.div>
                             </div>
 
-                            {/* Bio - arrive de la droite */}
+                            {/* Bio */}
                             <motion.div
                                 initial={{ x: 200, opacity: 0 }}
                                 animate={{ x: 0, opacity: 1 }}
                                 transition={{ duration: 1, delay: 0.5 }}
-                                className="absolute inset-x-0 top-80 z-10 mx-40 hidden flex-col items-center justify-center gap-4 px-4 md:top-[30rem] md:px-12 lg:top-[40rem] lg:flex lg:flex-row lg:px-20 xl:top-[35rem] 2xl:top-[45rem]"
+                                className="absolute inset-x-0 top-[40rem] z-10 mx-8 md:mx-20 lg:mx-32 xl:mx-52 2xl:mx-64 2xl:mt-50"
                             >
-                                <div className="rounded-lg bg-[#1E293B]/30 p-6 backdrop-blur-sm">
-                                    <h2 className="text-[#DDEEFF] xl:text-2xl 2xl:text-3xl">{user.bio}</h2>
+                                <div className="rounded-lg bg-[#1E293B]/30 p-6 text-center backdrop-blur-sm md:mt-10 lg:-mt-10">
+                                    <h2 style={{ fontFamily: 'PPEditorialNew' }} className="text-[#DDEEFF] xl:text-2xl 2xl:text-3xl">
+                                        {user.bio}
+                                    </h2>
                                 </div>
                             </motion.div>
-
-                            {/* Scroll indicator */}
-                            <div className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 animate-bounce text-white">
-                                <ChevronDown className="h-8 w-8" />
-                            </div>
-                        </div>
+                        </motion.div>
                     ) : (
                         <div className="text-white">Utilisateur non trouvé</div>
                     )}
-                </motion.div>
-            </div>
+                </div>
 
-            <section className="container mx-auto px-4" id="projets">
-                <div className="flex flex-col items-center">
-                    <div className="-mb-14 mt-20">
-                        <BadgeSecondary />
+                {/* SECTION PROJETS */}
+                <section className="z-10 container mx-auto px-4" id="projets">
+                    <div className="flex flex-col items-center">
+                        <div className="mt-20 -mb-16">
+                            <BadgeSecondary />
+                        </div>
                     </div>
-                </div>
+                    <div className="mt-10 grid grid-cols-1 gap-6 rounded-2xl border-t border-t-gray-300 px-4 py-20 shadow-lg md:grid-cols-2 lg:grid-cols-3 dark:shadow-blue-900/50">
+                        {projets && projets.map((projet) => <ProjetCard key={projet.id} projet={projet} />)}
+                    </div>
+                </section>
 
-                <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 shadow-lg dark:shadow-blue-900/50 border-t border-t-gray-300 rounded-2xl  container mx-auto px-4 py-20 mt-10">
-                    {projets && projets.map((projet) => <ProjetCard key={projet.id} projet={projet} />)}
-                </div>
-            </section>
+                {/* <section>
+                    <DirectionBlock />
+                </section> */}
 
-            {/* Affichage des skills */}
-            <section className="container mx-auto mt-20 px-4" id="competences">
-                <div className="mb-12 text-center">
-                    <h2 className="mb-3 text-4xl font-bold dark:text-white">Compétences</h2>
-                    <p className="mx-auto max-w-2xl text-lg dark:text-blue-200/80">
-                        Mes outils et technologies pour créer des applications performantes et modernes
-                    </p>
-                </div>
+                {/* SECTION COMPÉTENCES */}
+                <section className="z-10 container mx-auto mt-20 px-4" id="competences">
+                    <div className="mb-12 text-center">
+                        <h2 style={{ fontFamily: 'PPEditorialNew' }} className="mb-3 text-4xl font-bold text-white">
+                            Compétences
+                        </h2>
+                        <p className="mx-auto max-w-2xl text-lg text-blue-200/80">
+                            Mes outils et technologies pour créer des applications performantes et modernes
+                        </p>
+                    </div>
 
-                {categories.length > 0 ? (
-                    <Tabs defaultValue={categories[0]} className="w-full">
-                        <TabsList className="mb-8 flex w-full justify-center gap-2 bg-transparent">
+                    {/* Tabs */}
+                    {categories.length > 0 ? (
+                        <Tabs defaultValue={categories[0]} className="w-full">
+                            <TabsList className="mb-8 flex w-full justify-center gap-2 bg-transparent">
+                                {categories.map((category) => (
+                                    <TabsTrigger
+                                        key={category}
+                                        value={category}
+                                        className="font-black text-slate-50 data-[state=active]:text-blue-700 dark:data-[state=active]:bg-blue-500/20 dark:data-[state=active]:text-blue-500"
+                                    >
+                                        {category.toUpperCase()[0] + category.slice(1)}
+                                    </TabsTrigger>
+                                ))}
+                            </TabsList>
                             {categories.map((category) => (
-                                <TabsTrigger
-                                    key={category}
-                                    value={category}
-                                    className="data-[state=active]:bg-blue-500/20 data-[state=active]:text-blue-500"
-                                >
-                                    {category}
-                                </TabsTrigger>
-                            ))}
-                        </TabsList>
-
-                        {categories.map((category) => (
-                            <TabsContent key={category} value={category} className="mt-0">
-                                <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                                    {groupedSkills[category].map((skill) => (
-                                        <motion.div
-                                            key={skill.id}
-                                            initial={{ opacity: 0, y: 20 }}
-                                            whileInView={{ opacity: 1, y: 0 }}
-                                            transition={{ duration: 1 }}
-                                            viewport={{ once: true }}
-                                        >
-                                            <Card className="overflow-hidden border-0 bg-[#1E293B] shadow-lg transition-all duration-300 hover:shadow-blue-900/20">
-                                                <CardHeader className="pb-2">
-                                                    <CardTitle className="flex items-center justify-between text-xl">
-                                                        {skill.name}
-                                                        <Badge className={getLevelBadgeColor(skill.level as SkillLevel)}>
-                                                            {getLevelInFrench(skill.level as SkillLevel)}
-                                                        </Badge>
-                                                    </CardTitle>
-                                                </CardHeader>
-                                                <CardContent>
-                                                    <div className="mt-2 flex items-center gap-3">
-                                                        <div className="h-2 flex-1 overflow-hidden rounded-full bg-gray-700">
-                                                            <motion.div
-                                                                initial={{ width: 0 }}
-                                                                animate={{ width: `${skill.percentage}%` }} // largeur dynamique
-                                                                transition={{ duration: 1 }}
-                                                                className="h-full rounded-full bg-gradient-to-r from-blue-400 to-emerald-500"
-                                                            />
+                                <TabsContent key={category} value={category} className="mt-0">
+                                    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                                        {groupedSkills[category].map((skill) => (
+                                            <motion.div
+                                                key={skill.id}
+                                                initial={{ opacity: 0, y: 20 }}
+                                                whileInView={{ opacity: 1, y: 0 }}
+                                                transition={{ duration: 1 }}
+                                                viewport={{ once: true }}
+                                            >
+                                                <Card className="overflow-hidden border-0 shadow-lg transition-all duration-300 hover:shadow-blue-900/20 dark:bg-[#1E293B]">
+                                                    <CardHeader className="pb-2">
+                                                        <CardTitle className="flex items-center justify-between text-xl">
+                                                            {skill.name}
+                                                            <Badge className={getLevelBadgeColor(skill.level as SkillLevel)}>
+                                                                {getLevelInFrench(skill.level as SkillLevel)}
+                                                            </Badge>
+                                                        </CardTitle>
+                                                    </CardHeader>
+                                                    <CardContent>
+                                                        <div className="mt-2 flex items-center gap-3">
+                                                            <div className="h-2 flex-1 overflow-hidden rounded-full bg-gray-700">
+                                                                <motion.div
+                                                                    initial={{ width: 0 }}
+                                                                    animate={{ width: `${skill.percentage}%` }}
+                                                                    transition={{ duration: 1 }}
+                                                                    className="h-full rounded-full bg-gradient-to-r from-blue-400 to-emerald-500"
+                                                                />
+                                                            </div>
+                                                            <span className="w-10 text-right text-sm font-medium text-white">
+                                                                {skill.percentage}%
+                                                            </span>
                                                         </div>
-                                                        <span className="w-10 text-right text-sm font-medium text-white">{skill.percentage}%</span>
-                                                    </div>
-                                                    {skill.description && <p className="mt-4 text-sm text-gray-300">{skill.description}</p>}
-                                                </CardContent>
-                                            </Card>
-                                        </motion.div>
-                                    ))}
-                                </div>
-                            </TabsContent>
-                        ))}
-                    </Tabs>
-                ) : (
-                    <p className="text-center text-white">Aucune compétence trouvée.</p>
-                )}
-            </section>
-            <section className="container mx-auto my-10 px-4" id="experiences">
-                <h2 className="mb-6 text-center text-3xl font-bold dark:text-white">Expériences professionnelles</h2>
-                {(experiences ?? []).length > 0 ? (
-                    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                        {(experiences ?? []).map((exp) => (
-                            <ExperienceCard key={exp.id} experience={exp} />
-                        ))}
-                    </div>
-                ) : (
-                    <p>Aucune expérience trouvée.</p>
-                )}
-            </section>
-            <section className="container mx-auto my-10 mt-20 px-4 border-t" id="contact">
-                <ContactForm />
-            </section>
-            <div>
-                <Footer />
+                                                        {skill.description && <p className="mt-4 text-sm text-gray-300">{skill.description}</p>}
+                                                    </CardContent>
+                                                </Card>
+                                            </motion.div>
+                                        ))}
+                                    </div>
+                                </TabsContent>
+                            ))}
+                        </Tabs>
+                    ) : (
+                        <p className="text-center dark:text-white">Aucune compétence trouvée.</p>
+                    )}
+                </section>
+
+                {/* SECTION EXPÉRIENCES */}
+                <section className="z-10 container mx-auto my-20 px-4" id="experiences">
+                    <h2 style={{ fontFamily: 'PPEditorialNew' }} className="mb-10 text-center text-3xl font-bold dark:text-white">
+                        Expériences professionnelles
+                    </h2>
+                    {Array.isArray(experiences) && experiences.length > 0 ? (
+                        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                            {experiences.map((exp) => (
+                                <ExperienceCard key={exp.id} experience={exp} />
+                            ))}
+                        </div>
+                    ) : (
+                        <p>Aucune expérience trouvée.</p>
+                    )}
+                </section>
+
+                {/* SECTION CONTACT */}
+                <section className="z-10 container mx-auto border-t px-4" id="contact">
+                    <ContactForm />
+                </section>
+
+                {/* FOOTER */}
+                <div className="z-10">
+                    <Footer />
+                </div>
             </div>
-            {/* <footer className="mt-20 bg-gray-900 py-10 text-center text-white">
-                <p className="text-sm">© {new Date().getFullYear()} Yasscodeur1. Tous droits réservés.</p>
-            </footer> */}
         </div>
     );
 };

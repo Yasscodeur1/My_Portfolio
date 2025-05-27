@@ -304,6 +304,8 @@ function ResponsiveAppBar() {
                     borderRadius: "8px",
                     border: "1px solid rgba(255, 255, 255, 0.1)",
                     backdropFilter: "blur(5px)",
+                    fontSize: "1.1rem",
+                    fontWeight: 500,
                   }}
                 >
                   <Link
@@ -315,7 +317,7 @@ function ResponsiveAppBar() {
                       transition: "transform 0.3s ease",
                     }}
                   >
-                    Connexion
+                    Login
                   </Link>
                 </IconButton>
               </Tooltip>

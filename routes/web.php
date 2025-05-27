@@ -6,6 +6,7 @@ use App\Http\Controllers\SkillController;
 use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProjetController;
+use App\Http\Controllers\ContactController;
 use App\Models\User;
 use App\Models\Projet;
 use App\Models\Skill;
@@ -29,17 +30,14 @@ Route::get('/', function () {
 
 
 
-// Route::get('users/{user}', [UserController::class, 'show'])->name('users.show');
-// Route::get('projets/{projet}', [ProjetController::class, 'show'])->name('projets.show');
-// Route::get('skills/{skill}', [SkillController::class, 'show'])->name('skills.show');
-// Route::get('experiences/{experience}', [ExperienceController::class, 'show'])->name('experiences.show');
 
 
 Route::middleware(['auth', 'verified', 'isAdmin'])->group(function () {
     Route::get('dashboard', function () {
         return Inertia::render('dashboard');
     })->name('dashboard');
-
+    
+    Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
     Route::resource('users', UserController::class)->except(['show']);
     Route::resource('projets', ProjetController::class)->except(['show']);
     Route::resource('skills', SkillController::class)->except(['show']);

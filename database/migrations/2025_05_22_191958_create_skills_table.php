@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->nullable()->constrained();
             $table->string('name');
-            $table->enum('category', ['frontend', 'backend', 'fullstack', 'design']);
+            $table->enum('category', ['Brontend', 'Backend', 'Fullstack', 'Design']);
             $table->enum('level', ['beginner', 'intermediate', 'advanced']);
             $table->unsignedTinyInteger('percentage')->default(0);
             $table->string('logo')->nullable();

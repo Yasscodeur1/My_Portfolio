@@ -18,7 +18,7 @@ const formatDate = (date: string) => {
 
 const ExperienceCard = ({ experience }: { experience: Experience }) => {
   return (
-    <Card className="bg-[#1E293B] text-white shadow-md hover:shadow-blue-800/30 transition-shadow duration-300">
+    <Card className="dark:bg-[#1E293B] text-white shadow-md hover:shadow-blue-800/30 transition-shadow duration-300">
       <CardHeader>
         <CardTitle className="text-lg font-semibold">
           {experience.title} <br />

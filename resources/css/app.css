@@ -5,15 +5,26 @@
 @source '../views';
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 
+@import 'locomotive-scroll/dist/locomotive-scroll.css';
+
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap');
 
 /* Police locale */
 @font-face {
+  font-family: 'PPEditorialNew';
+  src: url('/assets/fonts/PPEditorialNew-Italic.woff2') format('woff2');
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* @font-face {
   font-family: 'PPEditorialNew-UltralightItalic';
   src: url('../assets/fonts/PPEditorialNew-UltralightItalic.woff2') format('woff2');
   font-weight: 200;
   font-style: italic;
-}
+} */
 
 :root {
   --font-pp-editorial: 'PPEditorialNew-UltralightItalic', serif;
