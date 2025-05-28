@@ -1,11 +1,23 @@
 import { Github, Linkedin, Mail } from "lucide-react"
-import VideoFooter from "./videoFooter"
+import Logo from "../../../../public/logo/Y.png"
 
 export default function Footer() {
   return (
     <footer className="bg-slate-50 dark:bg-slate-800 dark:text-slate-300 shadow-md border-t border-t-gray-200 py-5 px-6">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
-        <div><VideoFooter /></div>
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+        <div>
+          <img src="" alt="" />
+          <img
+                src={Logo }
+                alt="Logo"
+                className="w-50 h-30 m-1 rounded-full mr-3"
+                style={{
+                  filter: "drop-shadow(0 0 5px rgba(255, 255, 255, 0.5))",
+                  transition: "filter 0.3s ease",
+                }}
+              />
+          {/* <VideoFooter /> */}
+        </div>
         {/* Branding */}
         <div>
           
@@ -23,6 +35,7 @@ export default function Footer() {
             <li><a href="#about" className="hover:text-blue-400 transition">À propos</a></li>
             <li><a href="#projets" className="hover:text-blue-400 transition">Projets</a></li>
             <li><a href="#competences" className="hover:text-blue-400 transition">Compétences</a></li>
+            <li><a href="#experiences" className="hover:text-blue-400 transition">Compétences</a></li>
             <li><a href="#contact" className="hover:text-blue-400 transition">Contact</a></li>
           </ul>
         </div>

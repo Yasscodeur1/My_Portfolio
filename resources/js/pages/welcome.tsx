@@ -15,6 +15,8 @@ import BadgeSecondary from '../components/ui/badgeSecondary';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
 import { useTheme } from '../context/ThemeContext';
 import ExperienceCard from './experiences/show';
+import BadgeExperiences from '../components/ui/badgeExperiences';
+import BadgeCompetences from '@/components/ui/badgeCompetences';
 
 export interface PageProps {
     user: User | null; // L'utilisateur peut être null si non trouvé
@@ -254,10 +256,12 @@ const Welcome = () => {
                 </section> */}
 
                 {/* SECTION COMPÉTENCES */}
-                <section className="z-10 container mx-auto mt-20 px-4" id="competences">
+                <section className="z-10 container border-t rounded-2xl mx-auto mt-20 px-4" id="competences">
                     <div className="mb-12 text-center">
                         <h2 style={{ fontFamily: 'PPEditorialNew' }} className="mb-3 text-4xl font-bold text-white">
-                            Compétences
+                            <div className="mb-14 -mt-[31px] text-center">
+                                <BadgeCompetences />
+                            </div>
                         </h2>
                         <p className="mx-auto max-w-2xl text-lg text-blue-200/80">
                             Mes outils et technologies pour créer des applications performantes et modernes
@@ -327,8 +331,11 @@ const Welcome = () => {
                 </section>
 
                 {/* SECTION EXPÉRIENCES */}
-                <section className="z-10 container mx-auto my-20 px-4" id="experiences">
-                    <h2 style={{ fontFamily: 'PPEditorialNew' }} className="mb-10 text-center text-3xl font-bold dark:text-white">
+                <section className="z-10 container mx-auto border-t rounded-2xl my-40 px-4" id="experiences">
+                    <div className="mb-14 -mt-[31px] text-center">
+                        <BadgeExperiences />        
+                    </div>
+                    <h2 style={{ fontFamily: 'PPEditorialNew' }} className="mb-10 text-center text-3xl font-bold text-white">
                         Expériences professionnelles
                     </h2>
                     {Array.isArray(experiences) && experiences.length > 0 ? (
@@ -343,7 +350,7 @@ const Welcome = () => {
                 </section>
 
                 {/* SECTION CONTACT */}
-                <section className="z-10 container mx-auto border-t px-4" id="contact">
+                <section className="z-10 container mx-auto border-t rounded-2xl px-4" id="contact">
                     <ContactForm />
                 </section>
 

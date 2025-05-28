@@ -53,14 +53,14 @@ export default function ContactForm() {
         <div className="mb-20 px-4 mt-10 ">
             <div className="top-4/67 left-1/5 mx-auto max-w-5xl">
                 <div className="flex flex-col items-center mt-12">
-                    <div className="mb-14 -mt-20 ">
+                    <div className="mb-14 -mt-[78px] ">
                         <BadgeContact />
                     </div>
                 </div>
                 <div className="mb-20 text-center">
                     {/* <BadgeContact /> */}
                     {/* <h1 className="mb-4 text-4xl font-bold dark:text-slate-100">Contact</h1> */}
-                    <p className="mx-auto max-w-2xl text-xl dark:text-slate-300">
+                    <p className="mx-auto max-w-2xl text-xl text-slate-300">
                         Vous avez un projet en tête ? N'hésitez pas à me contacter pour en discuter.
                     </p>
                 </div>
