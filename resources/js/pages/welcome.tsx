@@ -17,6 +17,7 @@ import { useTheme } from '../context/ThemeContext';
 import ExperienceCard from './experiences/show';
 import BadgeExperiences from '../components/ui/badgeExperiences';
 import BadgeCompetences from '@/components/ui/badgeCompetences';
+import DirectionBlock from '@/components/sections/DirectionBlock';
 
 export interface PageProps {
     user: User | null; // L'utilisateur peut être null si non trouvé
@@ -250,10 +251,6 @@ const Welcome = () => {
                         {projets && projets.map((projet) => <ProjetCard key={projet.id} projet={projet} />)}
                     </div>
                 </section>
-
-                {/* <section>
-                    <DirectionBlock />
-                </section> */}
 
                 {/* SECTION COMPÉTENCES */}
                 <section className="z-10 container border-t rounded-2xl mx-auto mt-20 px-4" id="competences">
