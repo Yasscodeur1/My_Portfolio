@@ -17,7 +17,6 @@ import { useTheme } from '../context/ThemeContext';
 import ExperienceCard from './experiences/show';
 import BadgeExperiences from '../components/ui/badgeExperiences';
 import BadgeCompetences from '@/components/ui/badgeCompetences';
-import DirectionBlock from '@/components/sections/DirectionBlock';
 
 export interface PageProps {
     user: User | null; // L'utilisateur peut être null si non trouvé
