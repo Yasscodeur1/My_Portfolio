@@ -1,7 +1,7 @@
 import { Auth } from '@/types';
 import { Head, useForm } from '@inertiajs/react';
 import { route } from 'ziggy-js';
-import AuthenticatedLayout from '../../layouts/AuthenticatedLayout';
+import AuthenticatedLayout from '@/layouts/AuthenticatedLayout';
 
 interface FormData {
     title: string;

@@ -4,14 +4,13 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Mail, MapPin, Phone } from 'lucide-react';
-import Fonds from '../../../../public/images/Interface_3.png';
-// import FondOne from '../../../../public/images/Interface_1.png';
-import BadgeContact from '../../components/ui/BadgeContact';
+import Fonds from '/public/images/Interface_3.png';
+// import FondOne from '/public/images/Interface_1.png';
+import BadgeContact from '@/components/ui/BadgeContact';
 import { useForm } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
 import InputError from '@/components/input-error';
 import { toast } from 'sonner';
-import { useTheme } from '@/context/ThemeContext';
 
 type ContactFormData = {
     firstname: string;
@@ -30,10 +29,6 @@ export default function ContactForm() {
         message: '',
     });
 
-    const isDark = useTheme().theme === 'dark';
-    const cardStyle = isDark
-        ? 'bg-gray-800 text-white shadow-sm'
-        : 'bg-white text-gray-900 shadow-sm';       
 
 
     const submit: FormEventHandler = (e) => {

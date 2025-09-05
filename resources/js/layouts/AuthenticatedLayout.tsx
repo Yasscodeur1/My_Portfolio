@@ -1,21 +1,16 @@
-import ApplicationLogo from '../components/ui/ApplicationLogo';
-import Dropdown from '../components/ui/Dropdown';
-import NavLink from '../components/ui/NavLink';
-import ResponsiveNavLink from '../components/ui/ResponsiveNavLink';
+import ApplicationLogo from '@/components/ui/ApplicationLogo';
+import Dropdown from '@/components/ui/Dropdown';
+import DropdownLink from '@/components/ui/DropdownLink';
+import NavLink from '@/components/ui/NavLink';
+import ResponsiveNavLink from '@/components/ui/ResponsiveNavLink';
 import { Link, usePage } from '@inertiajs/react';
 import { useState } from 'react';
 import type { User, } from '@/types';
 import { route } from 'ziggy-js'
 
-interface DropdownProps {
-    align?: 'left' | 'right';
-    width?: string;
-    contentClasses?: string;
-    trigger: React.ReactNode;
-    children: React.ReactNode;
-}
 
 type AuthenticatedLayoutProps = {
+    user: User;
     header?: React.ReactNode;
     children: React.ReactNode;
 };
@@ -70,14 +65,12 @@ export default function AuthenticatedLayout({ header, children }: AuthenticatedL
                                     Experiences
                                 </NavLink>
                             </div>
-
-                            
                         </div>
 
                         <div className="hidden sm:ms-6 sm:flex sm:items-center">
                             <div className="relative ms-3">
-                                <Dropdown>
-                                    <Dropdown.Trigger>
+                                <Dropdown
+                                    trigger={
                                         <span className="inline-flex rounded-md">
                                             <button
                                                 type="button"
@@ -99,22 +92,16 @@ export default function AuthenticatedLayout({ header, children }: AuthenticatedL
                                                 </svg>
                                             </button>
                                         </span>
-                                    </Dropdown.Trigger>
-
-                                    <Dropdown.Content>
-                                        <Dropdown.Link
-                                            href={route('profile.edit')}
-                                        >
-                                            Profile
-                                        </Dropdown.Link>
-                                        <Dropdown.Link
-                                            href={route('logout')}
-                                            method="post"
-                                            as="button"
-                                        >
-                                            Log Out
-                                        </Dropdown.Link>
-                                    </Dropdown.Content>
+                                    }
+                                >
+                                    <DropdownLink href={route('profile.edit')}>
+                                        Profile
+                                    </DropdownLink>
+                                    <DropdownLink
+                                        href={route('logout')}
+                                    >
+                                        Log Out
+                                    </DropdownLink>
                                 </Dropdown>
                             </div>
                         </div>

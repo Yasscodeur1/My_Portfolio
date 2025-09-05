@@ -1,5 +1,5 @@
 import { Github, Linkedin, Mail } from "lucide-react"
-import Logo from "../../../../public/logo/Y.png"
+import Logo from "/public/logo/Y.png"
 
 export default function Footer() {
   return (

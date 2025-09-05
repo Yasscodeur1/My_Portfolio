@@ -1,13 +1,13 @@
 import { Head } from '@inertiajs/react';
-import AuthenticatedLayout from '../../layouts/AuthenticatedLayout';
-import { Auth, Project } from '@/types';
+import AuthenticatedLayout from '@/layouts/AuthenticatedLayout';
+import { Auth, Projet } from '@/types';
 import { route } from 'ziggy-js';
 import { Button } from '@headlessui/react';
 import { Inertia } from '@inertiajs/inertia';
 
 interface Props {
     auth: Auth;
-    projets: Project[]; // renommé pour cohérence
+    projets: Projet[]; // renommé pour cohérence
 }
 
 export default function Index({ auth, projets }: Props) {

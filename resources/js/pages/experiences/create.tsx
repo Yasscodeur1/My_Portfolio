@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { router } from '@inertiajs/react';
 import { Head } from '@inertiajs/react';
-import AuthenticatedLayout from '../../layouts/AuthenticatedLayout';
+import AuthenticatedLayout from '@/layouts/AuthenticatedLayout';
 import { Auth } from "@/types";
 import { Button } from '@headlessui/react';
 

@@ -1,6 +1,6 @@
 import { Head, useForm } from '@inertiajs/react';
 import { Auth } from '@/types';
-import AuthenticatedLayout from '../../layouts/AuthenticatedLayout';
+import AuthenticatedLayout from '@/layouts/AuthenticatedLayout';
 import { route } from 'ziggy-js';
 import { Button } from '@headlessui/react';
 

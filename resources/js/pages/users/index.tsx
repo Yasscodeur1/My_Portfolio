@@ -1,7 +1,6 @@
 import { Head } from '@inertiajs/react';
-import AuthenticatedLayout from '../../layouts/AuthenticatedLayout';
+import AuthenticatedLayout from '@/layouts/AuthenticatedLayout';
 import { User } from '@/types';
-import { Button } from '@headlessui/react'
 
 interface Props {
     auth: {

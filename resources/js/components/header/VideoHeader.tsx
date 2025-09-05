@@ -3,15 +3,10 @@ import { useEffect, useRef, useState } from "react";
 export default function VideoHeader() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isEnded, setIsEnded] = useState(false);
-  const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
     const video = videoRef.current;
 
-    // Vérifie le mode dark au chargement
-    if (typeof window !== 'undefined') {
-      setIsDark(document.documentElement.classList.contains("dark"));
-    }
 
     if (video) {
       const handleLoaded = () => {

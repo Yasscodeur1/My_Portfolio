@@ -6,16 +6,16 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import type { Projet, Skills, User } from '@/types';
 import { usePage } from '@inertiajs/react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Github, Linkedin, Mail } from 'lucide-react';
 import { useEffect, useRef } from 'react';
-import ResponsiveAppBar from '../components/header/ResponsiveAppBar';
-import ProjetCard from '../components/projets/ProjetCard';
-import BadgeSecondary from '../components/ui/badgeSecondary';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '../components/ui/tabs';
-import { useTheme } from '../context/ThemeContext';
-import ExperienceCard from './experiences/show';
-import BadgeExperiences from '../components/ui/badgeExperiences';
+import ResponsiveAppBar from '@/components/header/ResponsiveAppBar';
+import ProjetCard from '@/components/projets/ProjetCard';
+import BadgeSecondary from '@/components/ui/badgeSecondary';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { useTheme } from '@/context/ThemeContext';
+import ExperienceCard from '@/pages/experiences/show';
+import BadgeExperiences from '@/components/ui/badgeExperiences';
 import BadgeCompetences from '@/components/ui/badgeCompetences';
 
 export interface PageProps {
@@ -23,7 +23,7 @@ export interface PageProps {
     skills: Skills[];
     experiences?: Experience[];
     projets?: Projet[]; // Assurez-vous que 'projets' est bien défini dans vos props
-    [key: string]: any; // Permet d'ajouter d'autres propriétés dynamiques si nécessaire
+    [key: string]: unknown; // Permet d'ajouter d'autres propriétés dynamiques si nécessaire
 }
 
 type Experience = {
@@ -35,9 +35,6 @@ type Experience = {
     description?: string;
 };
 
-type DashboardProps = {
-    experiences?: Experience[];
-};
 
 type SkillLevel = 'beginner' | 'intermediate' | 'advanced';
 
@@ -104,8 +101,6 @@ const Welcome = () => {
     // Obtenir les catégories
     const categories = Object.keys(groupedSkills);
 
-    const { scrollY } = useScroll();
-    const y = useTransform(scrollY, [0, 1000], [0, -100]);
 
     const containerRef = useRef<HTMLDivElement>(null);
 

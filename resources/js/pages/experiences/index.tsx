@@ -1,5 +1,5 @@
 import { Head } from '@inertiajs/react';
-import AuthenticatedLayout from '../../layouts/AuthenticatedLayout';
+import AuthenticatedLayout from '@/layouts/AuthenticatedLayout';
 import { User, Experience } from '@/types';
 import { Button } from '@headlessui/react';
 import { Inertia } from '@inertiajs/inertia';

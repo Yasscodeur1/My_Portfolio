@@ -1,6 +1,6 @@
-import type { Auth, Skills } from '@/types';
+import type { Auth } from '@/types';
 import { Head, useForm } from '@inertiajs/react';
-import AuthenticatedLayout from '../../layouts/AuthenticatedLayout';
+import AuthenticatedLayout from '@/layouts/AuthenticatedLayout';
 import { Button } from '@headlessui/react';
 
 export default function CreateSkill({ auth }: { auth: Auth }) {
@@ -9,7 +9,7 @@ export default function CreateSkill({ auth }: { auth: Auth }) {
         level: '',
         percentage: 0,
         category: '',
-        logo: null,
+        logo: null as File | null,
     });
 
     // 
@@ -19,10 +19,10 @@ export default function CreateSkill({ auth }: { auth: Auth }) {
 
         if (type === 'file') {
             const file = (e.target as HTMLInputElement).files?.[0];
-            setData(name, file ?? null);
+            setData(name as keyof typeof data, file ?? null);
         } else {
             const value = type === 'range' ? parseInt(e.target.value) : e.target.value;
-            setData(name, value);
+            setData(name as keyof typeof data, value);
         }
     };
 

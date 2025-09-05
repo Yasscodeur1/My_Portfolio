@@ -1,5 +1,3 @@
-"use client"
-
 import * as React from "react"
 import {
   AppBar,
@@ -20,8 +18,8 @@ import AdbIcon from "@mui/icons-material/Adb"
 import LightModeIcon from "@mui/icons-material/LightMode"
 import DarkModeIcon from "@mui/icons-material/DarkMode"
 import { Link } from "@inertiajs/react"
-import Logo from "../../../../public/logo/Y.png"
-import { useTheme } from "../../context/ThemeContext"
+import Logo from "/public/logo/Y.png"
+import { useTheme } from "@/context/ThemeContext"
 
 
 const pages = ["Home", "About", "projets", "Competences", "Experiences", "contact"]
@@ -41,15 +39,12 @@ function HideOnScroll(props: { children: React.ReactElement }) {
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null)
   const [scrolled, setScrolled] = React.useState(false)
   const { theme, toggleTheme } = useTheme()
   const isDark = theme === "dark"
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => setAnchorElNav(event.currentTarget)
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => setAnchorElUser(event.currentTarget)
   const handleCloseNavMenu = () => setAnchorElNav(null)
-  const handleCloseUserMenu = () => setAnchorElUser(null)
 
   // Handle scroll effect
   React.useEffect(() => {
@@ -289,7 +284,7 @@ function ResponsiveAppBar() {
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Options utilisateur">
                 <IconButton
-                  onClick={handleOpenUserMenu}
+                  onClick={handleOpenNavMenu}
                   sx={{
                     color: "white",
                     padding: "10px",

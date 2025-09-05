@@ -1,6 +1,15 @@
 import { Link } from '@inertiajs/react';
+import { ReactNode } from 'react';
 
-export default function ResponsiveNavLink({ active = false, className = '', children, ...props }) {
+interface ResponsiveNavLinkProps {
+    active?: boolean;
+    className?: string;
+    children: ReactNode;
+    href: string;
+    [key: string]: unknown;
+}
+
+export default function ResponsiveNavLink({ active = false, className = '', children, ...props }: ResponsiveNavLinkProps) {
     return (
         <Link
             {...props}

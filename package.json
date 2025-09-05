@@ -1,6 +1,7 @@
 {
     "private": true,
     "type": "module",
+    "homepage": "https://Yasscodeur1.github.io/My_Portfolio", 
     "scripts": {
         "build": "vite build",
         "build:ssr": "vite build && vite build --ssr",
@@ -8,7 +9,9 @@
         "format": "prettier --write resources/",
         "format:check": "prettier --check resources/",
         "lint": "eslint . --fix",
-        "types": "tsc --noEmit"
+        "types": "tsc --noEmit",
+        "predeploy": "npm run build && npm run types && npm run format:check && npm run lint",
+        "deploy": "gh-pages -d public"
     },
     "devDependencies": {
         "@eslint/js": "^9.19.0",
@@ -17,6 +20,7 @@
         "eslint-config-prettier": "^10.0.1",
         "eslint-plugin-react": "^7.37.3",
         "eslint-plugin-react-hooks": "^5.1.0",
+        "gh-pages": "^6.3.0",
         "prettier": "^3.4.2",
         "prettier-plugin-organize-imports": "^4.1.0",
         "prettier-plugin-tailwindcss": "^0.6.11",

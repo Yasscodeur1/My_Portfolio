@@ -1,11 +1,11 @@
 import { Head, useForm } from '@inertiajs/react';
-import type { Auth, Skill } from '@/types';
-import AuthenticatedLayout from '../../layouts/AuthenticatedLayout';
+import type { Auth, Skills } from '@/types';
+import AuthenticatedLayout from '@/layouts/AuthenticatedLayout';
 import { route } from 'ziggy-js';
 
 interface Props {
     auth: Auth;
-    skill: Skill;
+    skill: Skills;
 }
 
 export default function EditSkill({ auth, skill }: Props) {
@@ -19,7 +19,7 @@ export default function EditSkill({ auth, skill }: Props) {
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
-        setData(name, value);
+        setData(name as "name" | "category" | "level" | "percentage" | "logo", value);
     };
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

@@ -1,20 +1,8 @@
-import { useState } from 'react';
 import { Head, useForm } from '@inertiajs/react';
 import type { Auth } from '@/types';
-import AuthenticatedLayout from '../../layouts/AuthenticatedLayout';
+import AuthenticatedLayout from '@/layouts/AuthenticatedLayout';
 import { route } from 'ziggy-js';
 
-interface FormData {
-    title: string;
-    company: string;
-    description: string;
-    start_date: string;
-    end_date: string;
-    [key: string]: string;
-}
-interface Props {
-    auth: Auth;
-}
 
 export default function CreateExperience({ auth }: { auth: Auth }) {
     const { data, setData, post, processing, errors } = useForm({
@@ -28,7 +16,7 @@ export default function CreateExperience({ auth }: { auth: Auth }) {
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
-        setData(name, value);
+        setData(name as keyof typeof data, value);
     };
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

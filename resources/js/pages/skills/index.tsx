@@ -2,7 +2,7 @@ import type { Skills, User } from '@/types';
 import { Button } from '@headlessui/react';
 import { Head } from '@inertiajs/react';
 import { Inertia } from '@inertiajs/inertia';
-import AuthenticatedLayout from '../../layouts/AuthenticatedLayout';
+import AuthenticatedLayout from '@/layouts/AuthenticatedLayout';
 
 interface Props {
     auth: {
